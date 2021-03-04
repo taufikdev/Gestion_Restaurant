@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Restaurant</string>
+    <string name="username">Restaurant</string>
+    <string-array name="categories">
+        <item>Pizza   </item>
+        <item>Pates   </item>
+        <item>Panini  </item>
+        <item>Poulet  </item>
+        <item>Tacos   </item>
+        <item>Sandwich</item>
+        <item>Desserts</item>
+    </string-array>
+    <string name="title_activity_igrediant">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+</resources>

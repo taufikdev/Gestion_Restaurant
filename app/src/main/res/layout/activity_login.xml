@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login"
+    >
+
+    <ImageView
+        android:layout_marginTop="60dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:src="@drawable/logo"
+        android:bottomRightRadius="80dp"
+        android:bottomLeftRadius="80dp"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        app:layout_constraintHeight_percent=".78"
+        app:layout_constraintVertical_bias="1"
+
+        >
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="370dp"
+        android:id="@+id/text_input_layout"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:boxCornerRadiusBottomEnd="30dp"
+        app:boxCornerRadiusBottomStart="30dp"
+        app:boxCornerRadiusTopEnd="30dp"
+        app:boxCornerRadiusTopStart="30dp"
+        android:layout_centerHorizontal="true"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:boxBackgroundColor="@color/blue2"
+        android:elevation="10dp"
+        >
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="UserName"
+            android:background="@null"
+            android:inputType="text|textNoSuggestions"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/text_input_layout2"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:boxCornerRadiusBottomEnd="30dp"
+        app:boxCornerRadiusBottomStart="30dp"
+        app:boxCornerRadiusTopEnd="30dp"
+        app:boxCornerRadiusTopStart="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/text_input_layout"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:boxBackgroundColor="@color/blue2"
+        android:elevation="10dp"
+        >
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:background="@null"
+            android:inputType="text|textNoSuggestions"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_input_layout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rouded_button"
+        app:backgroundTint="@color/orange"
+        android:text="login"
+        android:elevation="20dp"
+         />
+
+    <Button
+        android:id="@+id/textButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New account? sign-up"
+        android:textColor="@color/black"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:textSize="10dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        />
+
+</RelativeLayout>
