@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
+    android:background="@color/browser_actions_bg_grey"
     >
 
     <ImageView
-        android:layout_marginTop="60dp"
-
+        android:id="@+id/logoArea"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:src="@drawable/logo"
-        android:bottomRightRadius="80dp"
+        android:layout_height="266dp"
+        android:layout_marginTop="60dp"
         android:bottomLeftRadius="80dp"
-        />
+        android:bottomRightRadius="80dp"
+        android:src="@drawable/logo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -46,12 +46,12 @@
         >
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="UserName"
             android:background="@null"
-            android:inputType="text|textNoSuggestions"/>
+            android:hint="Email"
+            android:inputType="text|textNoSuggestions" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -74,7 +74,7 @@
         >
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
@@ -85,7 +85,7 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/loginBtn"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_input_layout2"
@@ -95,18 +95,6 @@
         app:backgroundTint="@color/orange"
         android:text="login"
         android:elevation="20dp"
-         />
-
-    <Button
-        android:id="@+id/textButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New account? sign-up"
-        android:textColor="@color/black"
-        android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:textSize="10dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
         />
 
 </RelativeLayout>

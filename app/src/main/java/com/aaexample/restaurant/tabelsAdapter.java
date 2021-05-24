@@ -13,11 +13,10 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-class MyAdapter extends ArrayAdapter<ListItem> {
-
+public class tabelsAdapter extends ArrayAdapter<ListItem> {
     ArrayList<ListItem> lst = new ArrayList();
 
-    public MyAdapter(@NonNull Context context, @NonNull ArrayList<ListItem> ListItems) {
+    public tabelsAdapter(@NonNull Context context, @NonNull ArrayList<ListItem> ListItems) {
         super(context, 0, ListItems);
     }
 
@@ -29,23 +28,23 @@ class MyAdapter extends ArrayAdapter<ListItem> {
 
         if(listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.my_row, parent, false);
+                    R.layout.table, parent, false);
         }
 
         ListItem currentListItem = getItem(position);
 
-        TextView tableN = listItemView.findViewById(R.id.plat_name);
+        TextView tableN = listItemView.findViewById(R.id.tableNum);
         tableN.setText(currentListItem.getmTableNumber());
-        ImageView tableImage = listItemView.findViewById(R.id.plat_image);
+        ImageView tableImage = listItemView.findViewById(R.id.icon);
 
-        //tableImage.setImageResource(R.drawable.table1);
+        tableImage.setImageResource(R.drawable.table1);
 
-        if (currentListItem.hasImage()) {
-            tableImage.setImageResource(currentListItem.getmImageResourceId());
+        /* if (currentTable.hasImage()) {
+            tableImage.setImageResource(currentTable.getmImageResourceId());
             tableImage.setVisibility(View.VISIBLE);
         } else {
             tableImage.setVisibility(View.GONE);
-        }
+        } */
         return listItemView;
     }
 }

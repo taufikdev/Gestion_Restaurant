@@ -2,7 +2,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
@@ -41,10 +40,10 @@
                 android:id="@+id/plat_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="30dp"
                 android:text="plat"
-                android:textSize="35sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/plat_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,11 +54,13 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="37dp"
                 android:layout_marginBottom="37dp"
-                android:text="Select..."
+                android:text="Select ..."
                 android:textColor="#737373"
+                android:textSize="10sp"
                 android:typeface="monospace"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.865"
                 app:layout_constraintStart_toEndOf="@+id/plat_name"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
