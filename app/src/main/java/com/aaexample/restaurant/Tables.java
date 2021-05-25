@@ -9,6 +9,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.aaexample.restaurant.classes.Commande;
+import com.aaexample.restaurant.classes.MyApplication;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Tables extends AppCompatActivity {
@@ -32,9 +38,15 @@ public class Tables extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ListItem ListItem = ListItems.get(position);
+                FirebaseDatabase db = FirebaseDatabase.getInstance();
+                DatabaseReference commandes = db.getReference("Commandes");
+                String idc = commandes.push().getKey();
+                Commande us = new Commande(idc, MyApplication.gUser,ListItem.getmTableNumber(),"en cours", LocalDateTime.now(),150.0f);
+                commandes.child(idc).setValue(us);
+
                 Intent i = new Intent(getApplicationContext(), Categories.class);
-                i.putExtra("label",ListItem.getmTableNumber());
-                //Toast.makeText(getApplicationContext(),ListItem.getmTableNumber(),Toast.LENGTH_LONG).show();
+             //   i.putExtra("label",ListItem.getmTableNumber());
+                i.putExtra("idcmd",idc);
                 startActivity(i);
             }
         });

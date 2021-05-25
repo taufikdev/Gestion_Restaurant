@@ -16,9 +16,10 @@ import lombok.ToString;
 
 public class Commande {
     private String id;
-    @Setter private Composition[] comps;
-    @Setter private User user;
-    @Setter private int table;
+  //  @Setter private Composition[] comps;
+    @Setter private String user;
+    @Setter private String table;
     @Setter private String etat;
     @Setter private LocalDateTime date;
+    @Setter private float montant;
 }

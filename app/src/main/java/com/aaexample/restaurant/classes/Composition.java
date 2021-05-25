@@ -13,9 +13,11 @@ import lombok.ToString;
 
 public class Composition {
 
-    private String id;
+    private String notes;
+    private String name;
+   /* private String id;
     @Setter
     Iteme iteme;
     @Setter private Ingredient[] ingreds;
-    @Setter private int quantite;
+    @Setter private int quantite;*/
 }

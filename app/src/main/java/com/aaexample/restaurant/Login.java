@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aaexample.restaurant.classes.MyApplication;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -72,6 +73,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         else {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
+                    MyApplication.gUser=email.substring(0,email.indexOf('@'));
                     startActivity(new Intent(getApplicationContext(), Tables.class));
                 } else
                     Toast.makeText(Login.this, "Signing failed", Toast.LENGTH_SHORT).show();

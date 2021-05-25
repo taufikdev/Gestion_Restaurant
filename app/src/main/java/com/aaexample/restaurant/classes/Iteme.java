@@ -16,5 +16,5 @@ public class Iteme {
     @Setter private String name;
     @Setter private float price;
     @Setter private String Category;
-    @Setter private int img;
+    @Setter private String img;
 }

@@ -27,16 +27,6 @@ import java.util.Locale;
 public class Categories extends AppCompatActivity {
     private ArrayList<ListItem> catItems;
     ListView catViews ;
-    String categs[];
-    int images[]={
-            R.drawable.pizza,
-            R.drawable.panini,
-            R.drawable.pate,
-            R.drawable.chicken,
-            R.drawable.taco,
-            R.drawable.sandwich,
-            R.drawable.dessert
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,20 +34,16 @@ public class Categories extends AppCompatActivity {
 
         catViews = findViewById(R.id.lstView);
         catItems = new ArrayList<ListItem>();
-        categs = getResources().getStringArray(R.array.categories);
+
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         DatabaseReference ref = db.getReference("categories");
-      //  Toast.makeText(getApplicationContext(),"first",Toast.LENGTH_SHORT).show();
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-             //   Toast.makeText(getApplicationContext(),"level 0",Toast.LENGTH_SHORT).show();
                 for (DataSnapshot c:snapshot.getChildren()
                 ) {
-                   // Toast.makeText(getApplicationContext(),"level 1",Toast.LENGTH_SHORT).show();
                     Category cat = c.getValue(Category.class);
-                    Toast.makeText(getApplicationContext(),cat.getName(),Toast.LENGTH_SHORT).show();
                     Context context = getApplicationContext();
                     int idimg = context.getResources().getIdentifier(cat.getImage(), "drawable", context.getPackageName());
                     catItems.add(new ListItem(cat.getName(),idimg));
@@ -71,18 +57,17 @@ public class Categories extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
         catViews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ListItem cat = catItems.get(position);
                 Intent i = new Intent(getApplicationContext(), Item.class);
-                i.putExtra("label", cat.getmTableNumber());
+              //  String Label = getIntent().getStringExtra("label");
+                String idcmd = getIntent().getStringExtra("idcmd");
+              //  i.putExtra("label", Label);
+                i.putExtra("idcmd",idcmd);
+                //get the name of category
+                i.putExtra("cat",cat.getmTableNumber());
                 startActivity(i);
             }
         });

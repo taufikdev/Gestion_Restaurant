@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
 
                     Query checkUser = db.getReference("Users").orderByChild("name").equalTo(user);
+
                     checkUser.addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
