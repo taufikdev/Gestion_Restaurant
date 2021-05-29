@@ -74,7 +74,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
                     MyApplication.gUser=email.substring(0,email.indexOf('@'));
-                    startActivity(new Intent(getApplicationContext(), Tables.class));
+                    if(MyApplication.gUser.equals("wafae.ouharra"))
+                    {startActivity(new Intent(getApplicationContext(), Commands.class));}
+                    else
+                    {startActivity(new Intent(getApplicationContext(), Tables.class));}
                 } else
                     Toast.makeText(Login.this, "Signing failed", Toast.LENGTH_SHORT).show();
             });

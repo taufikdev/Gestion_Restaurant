@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -16,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Tables extends AppCompatActivity {
 
@@ -41,7 +43,12 @@ public class Tables extends AppCompatActivity {
                 FirebaseDatabase db = FirebaseDatabase.getInstance();
                 DatabaseReference commandes = db.getReference("Commandes");
                 String idc = commandes.push().getKey();
-                Commande us = new Commande(idc, MyApplication.gUser,ListItem.getmTableNumber(),"en cours", LocalDateTime.now(),150.0f);
+
+                Date d = new Date();
+                CharSequence s = DateFormat.format("yyyy-MM-dd hh:mm:ss", d.getTime());
+              //  Toast.makeText(getApplicationContext(), s,Toast.LENGTH_SHORT).show();
+
+                Commande us = new Commande(idc, MyApplication.gUser,ListItem.getmTableNumber(),"inProgress", s.toString(),0.0f);
                 commandes.child(idc).setValue(us);
 
                 Intent i = new Intent(getApplicationContext(), Categories.class);

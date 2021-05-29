@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 class MyAdapter extends ArrayAdapter<ListItem> {
 
-    ArrayList<ListItem> lst = new ArrayList();
 
     public MyAdapter(@NonNull Context context, @NonNull ArrayList<ListItem> ListItems) {
         super(context, 0, ListItems);
@@ -36,6 +35,10 @@ class MyAdapter extends ArrayAdapter<ListItem> {
 
         TextView tableN = listItemView.findViewById(R.id.plat_name);
         tableN.setText(currentListItem.getmTableNumber());
+
+        TextView price = listItemView.findViewById(R.id.plat_price);
+        price.setText(String.valueOf(currentListItem.getDetails()));
+
         ImageView tableImage = listItemView.findViewById(R.id.plat_image);
 
         //tableImage.setImageResource(R.drawable.table1);

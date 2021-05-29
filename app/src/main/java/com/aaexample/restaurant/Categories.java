@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class Categories extends AppCompatActivity {
@@ -34,7 +36,6 @@ public class Categories extends AppCompatActivity {
 
         catViews = findViewById(R.id.lstView);
         catItems = new ArrayList<ListItem>();
-
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         DatabaseReference ref = db.getReference("categories");

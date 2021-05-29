@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -29,10 +28,12 @@ public class CustomAdapter extends ArrayAdapter<ItemData> {
         }
         // Lookup view for data population
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-        TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
+      //  TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
+        TextView tvNotes = convertView.findViewById(R.id.tvNotes);
         // Populate the data into the template view using the data object
         tvName.setText(item.ItemName);
-        tvHome.setText(item.Image);
+      // tvHome.setText(item.Image);
+        tvNotes.setText(item.Notes);
         // Return the completed view to render on screen
         return convertView;
     }

@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aaexample.restaurant.classes.Category;
@@ -30,12 +31,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Item extends AppCompatActivity {
 
     final ArrayList<ListItem> arrayOfItems = new ArrayList<>();
     MyAdapter adapter;
     ListView listView;
+    float montant=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +60,7 @@ public class Item extends AppCompatActivity {
                    // Toast.makeText(getApplicationContext(),itm.getName() ,Toast.LENGTH_LONG).show();
                    Context context = getApplicationContext();
                     int idimg = context.getResources().getIdentifier(itm.getImg(), "drawable", context.getPackageName());
-                    arrayOfItems.add(new ListItem(itm.getName(),idimg));
+                    arrayOfItems.add(new ListItem(itm.getName(),idimg,itm.getPrice()));
                 }
 
 
@@ -80,18 +83,44 @@ public class Item extends AppCompatActivity {
                 alertBuilder.setView(v);
                 AlertDialog  alertDialog = alertBuilder.create();
                 alertDialog.show();
-                EditText etnotes = v.findViewById(R.id.notes);
+                EditText etnotes = v.findViewById(R.id.etnotes);
                 Button btnvalidate = v.findViewById(R.id.validate);
-                String notes = etnotes.getText().toString();
+                TextView tvprice = view.findViewById(R.id.plat_price);
+                TextView tvname = view.findViewById(R.id.plat_name);
                 btnvalidate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String idcmd = getIntent().getStringExtra("idcmd");
+                        String user = MyApplication.gUser;
+                        String name = tvname.getText().toString();
+                        String notes = etnotes.getText().toString();
+                        float price = Float.valueOf(tvprice.getText().toString());
+
+
                         FirebaseDatabase db = FirebaseDatabase.getInstance();
+
                         DatabaseReference commandes = db.getReference("Commandes").child(idcmd);
-                        commandes.child(notes).setValue(notes);
+                        String iditem = commandes.child("Items").push().getKey();
+                        commandes.child("Items").child(iditem).setValue(new Iteme(name,price,notes));
+//                        Toast.makeText(getApplicationContext(), montant,Toast.LENGTH_SHORT).show();
+                        commandes.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                               Commande cmd = snapshot.getValue(Commande.class);
+                                montant = cmd.getMontant();
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        commandes.child("montant").setValue(montant+price);
+                        // commandes.child("notes").setValue(notes);
                        // Query checkUser = db.getReference("Commandes").orderByChild().equalTo(idcmd);
                         //Toast.makeText(getApplicationContext(), "success",Toast.LENGTH_SHORT).show();
+                       // CharSequence s = DateFormat.format("yyyy-MM-dd hh:mm:ss", d.getTime());
                         alertDialog.dismiss();
                     }
                 });

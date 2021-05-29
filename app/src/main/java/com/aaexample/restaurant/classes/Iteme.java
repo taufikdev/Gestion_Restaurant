@@ -17,4 +17,11 @@ public class Iteme {
     @Setter private float price;
     @Setter private String Category;
     @Setter private String img;
+    @Setter private String notes;
+
+    public Iteme(String name,float price,String notes){
+        this.name = name;
+        this.price = price;
+        this.notes = notes;
+    }
 }
