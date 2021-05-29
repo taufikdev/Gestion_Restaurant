@@ -77,7 +77,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     if(MyApplication.gUser.equals("wafae.ouharra"))
                     {startActivity(new Intent(getApplicationContext(), Commands.class));}
                     else
-                    {startActivity(new Intent(getApplicationContext(), Tables.class));}
+                    {startActivity(new Intent(getApplicationContext(), home.class));}
                 } else
                     Toast.makeText(Login.this, "Signing failed", Toast.LENGTH_SHORT).show();
             });
