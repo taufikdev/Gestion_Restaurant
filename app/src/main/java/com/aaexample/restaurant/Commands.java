@@ -43,7 +43,7 @@ public class Commands extends AppCompatActivity {
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-        int cmdstype = getIntent().getIntExtra("cmdtype",0);
+        int cmdstype = getIntent().getIntExtra("cmdtype",-1);
 
         switch (cmdstype){
             case 0:
@@ -98,7 +98,7 @@ public class Commands extends AppCompatActivity {
                         Commands = new ArrayList<Commande>();
                         for (DataSnapshot c:snapshot.getChildren()) {
                             Commande cmd = c.getValue(Commande.class);
-                            Commands.add(new Commande(cmd.getId(),cmd.getEtat(),cmd.getUser(),cmd.getTable()));
+                            Commands.add(new Commande(cmd.getId(),cmd.getEtat(),cmd.getUser(),cmd.getTable(),cmd.getDate(),cmd.getMontant()));
                         }
                         lstView.setAdapter(new CmdAdapter(getApplicationContext(), Commands,2));
                     }

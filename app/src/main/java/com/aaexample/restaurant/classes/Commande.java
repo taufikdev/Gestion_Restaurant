@@ -11,7 +11,6 @@ import lombok.ToString;
 
 @ToString
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class Commande {
@@ -30,6 +29,14 @@ public class Commande {
         this.etat = etat;
         this.user = user;
         this.table = table;
-      //  this.items =new Iteme[10];
+    }
+
+    public Commande (String id, String etat, String user, String table,String dat,float montant){
+        this.id = id;
+        this.etat = etat;
+        this.user = user;
+        this.table = table;
+        this.date = dat;
+        this.montant = montant;
     }
 }

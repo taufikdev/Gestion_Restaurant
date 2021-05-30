@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:orientation="vertical"
-    tools:context=".CommandDetails">
-
+    tools:context=".Facture">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -22,10 +21,11 @@
 
         <TextView
             android:layout_width="181dp"
+            android:id="@+id/txt"
             android:layout_height="42dp"
             android:layout_marginStart="50dp"
             android:fontFamily="sans-serif-light"
-            android:text="Order Details"
+            android:text="Facture"
             android:textColor="#F0424141"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -34,7 +34,21 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+        <Button
+            android:id="@+id/payBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="Pay"
+            android:background="@drawable/rouded_button"
+            app:backgroundTint="@color/orange"
+            android:textColor="@color/browser_actions_bg_grey"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/txt"
+            app:layout_constraintStart_toStartOf="@id/txt"
+            app:layout_constraintTop_toBottomOf="@id/txt"
+            app:layout_constraintVertical_bias="0.516" />
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="119dp"
@@ -51,85 +65,85 @@
             app:srcCompat="@drawable/logo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
-            android:id="@+id/tableNumberLabel4"
             android:layout_width="150dp"
             android:layout_height="31dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="20dp"
-            android:text="Table Number :"
+            android:layout_marginTop="16dp"
+            android:text="Date : "
             android:textColor="@color/common_google_signin_btn_text_light_default"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableNumberLabel2" />
+            android:textSize="20sp"/>
+
         <TextView
-            android:id="@+id/txtTableNum"
-            android:layout_width="100dp"
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
             android:layout_height="31dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
             android:textColor="@color/common_google_signin_btn_text_light_default"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.279"
-            app:layout_constraintStart_toEndOf="@+id/tableNumberLabel2"
-            app:layout_constraintTop_toBottomOf="@+id/txtServerName" />
+            android:textSize="20sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
-            android:id="@+id/tableNumberLabel3"
             android:layout_width="150dp"
             android:layout_height="31dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="20dp"
-            android:text="Server Name : "
+            android:layout_marginTop="16dp"
+            android:text="Table Number : "
             android:textColor="@color/common_google_signin_btn_text_light_default"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"/>
+            android:textSize="20sp"/>
+
         <TextView
-            android:id="@+id/txtServerName"
-            android:layout_width="100dp"
+            android:id="@+id/tvTableNum"
+            android:layout_width="wrap_content"
             android:layout_height="31dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
             android:textColor="@color/common_google_signin_btn_text_light_default"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.279"
-            app:layout_constraintStart_toEndOf="@+id/tableNumberLabel3"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+            android:textSize="20sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
-            android:id="@+id/tableNumberLabel2"
             android:layout_width="150dp"
             android:layout_height="31dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="20dp"
-            android:text="Items : "
+            android:layout_marginTop="16dp"
+            android:text="Total amount : "
             android:textColor="@color/common_google_signin_btn_text_light_default"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableNumberLabel3" />
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/common_google_signin_btn_text_light_default"
+            android:textSize="20sp" />
     </LinearLayout>
+
     <ListView
-        android:id="@+id/lstvCmdItems"
+        android:id="@+id/lstvFacture"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableNumberLabel4" />
+        android:layout_marginTop="20dp" />
 
 
 </LinearLayout>

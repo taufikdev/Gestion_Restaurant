@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Restaurant">
-        <activity android:name=".Serving"></activity>
+        <activity android:name=".Facture"></activity>
+        <activity android:name=".Serving" />
         <activity android:name=".Payment" />
         <activity android:name=".home" />
         <activity android:name=".CommandDetails" />

@@ -58,9 +58,23 @@ public class CmdAdapter extends ArrayAdapter<Commande> {
     //    Toast.makeText(getContext(), action, Toast.LENGTH_SHORT).show();
 
         Button btn = CommandeView.findViewById(R.id.readyBtn);
+
         //server side when order is served and had to get paid
     if(action == 2){
         btn.setText("pay");
+        CommandeView.findViewById(R.id.rowLine).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(context, Facture.class);
+                i.putExtra("idcomd", currentCmd.getId());
+                i.putExtra("table",currentCmd.getTable());
+                i.putExtra("date",currentCmd.getDate());
+                i.putExtra("amount",currentCmd.getMontant());
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
+            }
+        });
         CommandeView.findViewById(R.id.readyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,8 +86,9 @@ public class CmdAdapter extends ArrayAdapter<Commande> {
                 //  Toast.makeText(context, "ready", Toast.LENGTH_SHORT).show();
             }
         });
-        //chef side when order had to be ready
+
     }
+//chef side when order has to be Ready
     if(action == 0){
         CommandeView.findViewById(R.id.readyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
