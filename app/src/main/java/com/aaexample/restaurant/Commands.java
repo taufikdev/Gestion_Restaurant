@@ -43,12 +43,14 @@ public class Commands extends AppCompatActivity {
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-        int cmdstype = getIntent().getIntExtra("cmdtype",-1);
+        int cmdstype = getIntent().getIntExtra("cmdtype",0);
 
         switch (cmdstype){
             case 0:
                 //inprogress
                 Query checkUser = db.getReference("Commandes").orderByChild("etat").equalTo("inProgress");
+                Toast.makeText(getApplicationContext(), "inprogress",Toast.LENGTH_SHORT).show();
+
                 checkUser.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
@@ -58,7 +60,6 @@ public class Commands extends AppCompatActivity {
                             Commands.add(new Commande(cmd.getId(),cmd.getEtat(),cmd.getUser(),cmd.getTable()));
                         }
                         lstView.setAdapter(new CmdAdapter(getApplicationContext(), Commands,0));
-                       // Toast.makeText(getApplicationContext(), "ready", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -66,7 +67,6 @@ public class Commands extends AppCompatActivity {
 
                     }
                 });
-
 
                 break;
             case 1:

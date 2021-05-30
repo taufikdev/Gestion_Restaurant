@@ -57,7 +57,7 @@ public class Tables extends AppCompatActivity {
                 CharSequence s = DateFormat.format("yyyy-MM-dd hh:mm:ss", d.getTime());
 
 
-                Commande us = new Commande(idc, MyApplication.gUser,table.getText().toString(),"inProgress", s.toString(),0.0f);
+                Commande us = new Commande(idc, "inProgress",MyApplication.gUser,table.getText().toString(), s.toString(),0.0f);
                 commandes.child(idc).setValue(us);
 
                 Intent i = new Intent(getApplicationContext(), Categories.class);

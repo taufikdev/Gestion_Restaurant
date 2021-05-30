@@ -173,7 +173,7 @@ public class Item extends AppCompatActivity {
                     }
                 }
                 listView.setAdapter(new MyAdapter(getApplicationContext(), filteredCatItems));
-                 Toast.makeText(getApplicationContext(), "im changing", Toast.LENGTH_LONG).show();
+             //    Toast.makeText(getApplicationContext(), "im changing", Toast.LENGTH_LONG).show();
             }
 
             @Override
