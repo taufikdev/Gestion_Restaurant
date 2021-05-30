@@ -75,7 +75,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 if (task.isSuccessful()) {
                     MyApplication.gUser=email.substring(0,email.indexOf('@'));
                     if(MyApplication.gUser.equals("wafae.ouharra"))
-                    {startActivity(new Intent(getApplicationContext(), Commands.class));}
+                    {
+                        Intent i = new Intent(getApplicationContext(), Commands.class);
+                        //cmdtype :0 =>orders in progress.
+                        i.putExtra("cmdtype",0);
+                        startActivity(i);}
                     else
                     {startActivity(new Intent(getApplicationContext(), home.class));}
                 } else

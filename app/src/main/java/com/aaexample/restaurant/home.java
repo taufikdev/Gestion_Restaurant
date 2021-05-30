@@ -24,8 +24,19 @@ public class home extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.takeBtn: startActivity(new Intent(this, Tables.class)); break;
-            case R.id.viewBtn: startActivity(new Intent(this, Commands.class)); break;
-            case R.id.payBtn: startActivity(new Intent(this, Payment.class)); break;
+            case R.id.viewBtn:
+                Intent i1 = new Intent(this, Commands.class);
+                //cmdtype :1 =>orders ready.
+                i1.putExtra("cmdtype",1);
+                startActivity(i1);
+                break;
+            case R.id.payBtn:
+                //startActivity(new Intent(this, Payment.class));
+                Intent i = new Intent(this, Commands.class);
+                //cmdtype :2 =>orders served.
+                i.putExtra("cmdtype",2);
+                startActivity(i);
+                break;
         }
     }
 }

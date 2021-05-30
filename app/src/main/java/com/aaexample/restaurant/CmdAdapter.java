@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class CmdAdapter extends ArrayAdapter<Commande> {
     private Context context;
     private View CommandeView;
-    private int action;
+    int action;
 
     public CmdAdapter(Context context, ArrayList<Commande> commandes,int i) {
         super(context, 0, commandes);
@@ -55,9 +55,11 @@ public class CmdAdapter extends ArrayAdapter<Commande> {
         
         TextView server = CommandeView.findViewById(R.id.server_name);
         server.setText(currentCmd.getUser());
+    //    Toast.makeText(getContext(), action, Toast.LENGTH_SHORT).show();
 
         Button btn = CommandeView.findViewById(R.id.readyBtn);
-    if(action==0){
+        //server side when order is served and had to get paid
+    if(action == 2){
         btn.setText("pay");
         CommandeView.findViewById(R.id.readyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +72,9 @@ public class CmdAdapter extends ArrayAdapter<Commande> {
                 //  Toast.makeText(context, "ready", Toast.LENGTH_SHORT).show();
             }
         });
-    }else{
+        //chef side when order had to be ready
+    }
+    if(action == 0){
         CommandeView.findViewById(R.id.readyBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,8 +99,33 @@ public class CmdAdapter extends ArrayAdapter<Commande> {
             }
         });
     }
+//server side when order has to be served
+    if(action == 1){
+        btn.setText("serve");
+        CommandeView.findViewById(R.id.readyBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase db = FirebaseDatabase.getInstance();
+                DatabaseReference commandes = db.getReference("Commandes").child(currentCmd.getId());
+                commandes.child("etat").setValue("Served");
+                //  Toast.makeText(context, "modification",Toast.LENGTH_SHORT).show();
 
 
+            }
+        });
+
+        CommandeView.findViewById(R.id.rowLine).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(context, CommandDetails.class);
+                i.putExtra("idcomd", currentCmd.getId());
+                i.putExtra("table",currentCmd.getTable());
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
+            }
+        });
+    }
 
         return CommandeView;
     }

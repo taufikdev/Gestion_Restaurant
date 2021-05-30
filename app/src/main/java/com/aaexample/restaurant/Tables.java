@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aaexample.restaurant.classes.Commande;
@@ -22,11 +26,13 @@ import java.util.Date;
 public class Tables extends AppCompatActivity {
 
     private GridView gridView;
-    private ArrayList<ListItem> ListItems;
+    private ArrayList<ListItem> ListItems,filteredCatItems;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tables);
+
+        EditText search = findViewById(R.id.etsearch);
 
         gridView = findViewById(R.id.tablesGridView);
 
@@ -39,16 +45,19 @@ public class Tables extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListItem ListItem = ListItems.get(position);
+                //ListItem ListItem = ListItems.get(position);
+                TextView table = view.findViewById(R.id.tableNum);
+               // Toast.makeText(getApplicationContext(),table.getText().toString() ,Toast.LENGTH_SHORT).show();
+
                 FirebaseDatabase db = FirebaseDatabase.getInstance();
                 DatabaseReference commandes = db.getReference("Commandes");
                 String idc = commandes.push().getKey();
 
                 Date d = new Date();
                 CharSequence s = DateFormat.format("yyyy-MM-dd hh:mm:ss", d.getTime());
-              //  Toast.makeText(getApplicationContext(), s,Toast.LENGTH_SHORT).show();
 
-                Commande us = new Commande(idc, MyApplication.gUser,ListItem.getmTableNumber(),"inProgress", s.toString(),0.0f);
+
+                Commande us = new Commande(idc, MyApplication.gUser,table.getText().toString(),"inProgress", s.toString(),0.0f);
                 commandes.child(idc).setValue(us);
 
                 Intent i = new Intent(getApplicationContext(), Categories.class);
@@ -57,5 +66,33 @@ public class Tables extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filteredCatItems = new ArrayList<ListItem>();
+                for (int i = 0; i < ListItems.size(); i++){
+                    String itemLabel, searchText;
+                    itemLabel = ListItems.get(i).getmTableNumber().toLowerCase();
+                    searchText = search.getText().toString().toLowerCase();
+                    if(itemLabel.contains(searchText)){
+                        filteredCatItems.add(ListItems.get(i));
+                    }
+                }
+                gridView.setAdapter(new tabelsAdapter(getApplicationContext(), filteredCatItems));
+               // Toast.makeText(getApplicationContext(), "im changing", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 }

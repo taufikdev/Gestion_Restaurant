@@ -65,7 +65,7 @@
             app:srcCompat="@drawable/logo" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/etsearch"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

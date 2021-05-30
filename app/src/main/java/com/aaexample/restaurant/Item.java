@@ -8,6 +8,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,14 +37,16 @@ import java.util.Date;
 
 public class Item extends AppCompatActivity {
 
-    final ArrayList<ListItem> arrayOfItems = new ArrayList<>();
+    ArrayList<ListItem> arrayOfItems,filteredCatItems;
     MyAdapter adapter;
     ListView listView;
-    float montant=0;
+    float montant;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
+
+        EditText search = findViewById(R.id.etsearch);
 
         listView = (ListView) findViewById(R.id.items);
         String Label = getIntent().getStringExtra("label");
@@ -54,6 +58,7 @@ public class Item extends AppCompatActivity {
         checkUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                arrayOfItems = new ArrayList<>();
                 for (DataSnapshot c:snapshot.getChildren()
                 ) {
                     Iteme itm = c.getValue(Iteme.class);
@@ -73,6 +78,7 @@ public class Item extends AppCompatActivity {
 
             }
         });
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -103,12 +109,13 @@ public class Item extends AppCompatActivity {
                         String iditem = commandes.child("Items").push().getKey();
                         commandes.child("Items").child(iditem).setValue(new Iteme(name,price,notes));
 //                        Toast.makeText(getApplicationContext(), montant,Toast.LENGTH_SHORT).show();
-                        commandes.addValueEventListener(new ValueEventListener() {
+                        commandes.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                               Commande cmd = snapshot.getValue(Commande.class);
+                                Commande cmd = snapshot.getValue(Commande.class);
                                 montant = cmd.getMontant();
-
+                                Toast.makeText(getApplicationContext(), "receive",Toast.LENGTH_SHORT).show();
+                                commandes.child("montant").setValue(montant+price);
                             }
 
                             @Override
@@ -116,15 +123,64 @@ public class Item extends AppCompatActivity {
 
                             }
                         });
-                        commandes.child("montant").setValue(montant+price);
+                        /* commandes.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                               Commande cmd = snapshot.getValue(Commande.class);
+                                montant = cmd.getMontant();
+                                Toast.makeText(getApplicationContext(), "receive",Toast.LENGTH_SHORT).show();
+                                return;
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });*/
+                     //   commandes.child("montant").setValue(montant+price);
                         // commandes.child("notes").setValue(notes);
                        // Query checkUser = db.getReference("Commandes").orderByChild().equalTo(idcmd);
-                        //Toast.makeText(getApplicationContext(), "success",Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getApplicationContext(), "update",Toast.LENGTH_SHORT).show();
                        // CharSequence s = DateFormat.format("yyyy-MM-dd hh:mm:ss", d.getTime());
                         alertDialog.dismiss();
+
+
+                        Toast.makeText(getApplicationContext(), "update",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
+
+
+
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filteredCatItems = new ArrayList<ListItem>();
+                for (int i = 0; i < arrayOfItems.size(); i++){
+                    String itemLabel, searchText;
+                    itemLabel = arrayOfItems.get(i).getmTableNumber().toLowerCase();
+                    searchText = search.getText().toString().toLowerCase();
+                    if(itemLabel.contains(searchText)){
+                        filteredCatItems.add(arrayOfItems.get(i));
+                    }
+                }
+                listView.setAdapter(new MyAdapter(getApplicationContext(), filteredCatItems));
+                 Toast.makeText(getApplicationContext(), "im changing", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 }

@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -36,12 +37,11 @@ public class Payment extends AppCompatActivity {
         lstView = findViewById(R.id.cmdLstView);
 
 
-
-
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         DatabaseReference ref = db.getReference("Commandes");
-        ref.addValueEventListener(new ValueEventListener() {
+        Query checkUser = db.getReference("Commandes").orderByChild("etat").equalTo("Served");
+        checkUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Commands = new ArrayList<Commande>();
